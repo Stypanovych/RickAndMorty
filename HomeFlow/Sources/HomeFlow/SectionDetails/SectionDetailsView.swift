@@ -22,36 +22,72 @@ struct SectionDetailsView: View {
 
     var body: some View {
         Group {
-            VStack {
-                SearchBar(placeholder: "Enter a name", text: $viewModel.searchName)
-                    .frame(height: showSearchBar ? 40 : 0)
-                    .background(Color("BrightGray"))
-                    .cornerRadius(7)
-                    .padding(.horizontal, 24)
-                if viewModel.noData {
-                    NoDataView()
-                } else {
-                    if !viewModel.characters.isEmpty {
-                        ScrollView {
-                            LazyVGrid(columns: columns, spacing: 24) {
-                                ForEach(viewModel.characters, id: \.id) { character in
-                                    createGridItem(characterInfo: character)
-                                }
-                            }
-                            .padding(.horizontal, 24)
-                            loadMoreView
-                        }
-                    } else {
-                        Spacer()
-                    }
-                }
-            }
+            contentView
         }
         .backgroundColor("BackgroundColor")
+        .alert(
+            isPresented: Binding<Bool>(
+                get: {
+                    return viewModel.errorDescription != nil
+                },
+                set: { newValue in
+                    if newValue {
+                        withAnimation {
+                            viewModel.errorDescription = nil
+                        }
+                    }
+                }
+            )
+        ) {
+            Alert(
+                title: Text("Error"),
+                message: Text(viewModel.errorDescription ?? String()),
+                dismissButton: .default(
+                    Text("Okay"),
+                    action: {
+                        viewModel.errorDescription = nil
+                    }
+                )
+            )
+        }
         .navigationBarItems(leading: backButton, trailing: filterButton)
         .navigationTitle("Characters")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
+    }
+
+    var contentView: some View {
+        VStack {
+            SearchBar(placeholder: "Enter a name", text: $viewModel.searchName)
+                .frame(height: showSearchBar ? 40 : 0)
+                .background(Color("BrightGray"))
+                .cornerRadius(7)
+                .padding(.horizontal, 24)
+                .padding(.top, 4)
+            if viewModel.noData {
+                NoDataView()
+            } else {
+                itemsView
+            }
+        }
+    }
+
+    var itemsView: some View {
+        Group {
+            if !viewModel.characters.isEmpty {
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 24) {
+                        ForEach(viewModel.characters, id: \.id) { character in
+                            createGridItem(characterInfo: character)
+                        }
+                    }
+                    .padding(.horizontal, 24)
+                    loadMoreView
+                }
+            } else {
+                Spacer()
+            }
+        }
     }
 
     var backButton: some View {
@@ -121,24 +157,5 @@ struct SectionDetailsView: View {
                     }
             }
         }
-    }
-}
-
-struct NoDataView: View {
-
-    var body: some View {
-        VStack {
-            Spacer()
-            Image("rick_morty_nothing")
-                .resizable()
-                .scaledToFit()
-            Text("Look, Morty!\nThere's nothing there!")
-                .font(.system(size: 20, weight: .bold))
-                .foregroundColor(Color("TextColor"))
-                .multilineTextAlignment(.center)
-                .padding(.top, 16)
-            Spacer()
-        }
-        .padding(24)
     }
 }

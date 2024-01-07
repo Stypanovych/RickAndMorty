@@ -11,7 +11,7 @@ import Domain
 import Common
 import Data
 
-public class CharactersSectionViewModel: ObservableObject, Resultable {
+public class CharactersSectionViewModel: ObservableObject, Resultable { //named as CharactersSectionViewModel because expected to have other VMs which calls location and episodes which may have the same view but different VMs.
 
     public enum Result: Equatable {
         case moveBack
