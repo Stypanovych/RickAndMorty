@@ -14,6 +14,7 @@
 		FA0311CC2B3DAFF300C3D295 /* RickAndMortyExplorerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0311CB2B3DAFF300C3D295 /* RickAndMortyExplorerUITests.swift */; };
 		FA0311CE2B3DAFF300C3D295 /* RickAndMortyExplorerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0311CD2B3DAFF300C3D295 /* RickAndMortyExplorerUITestsLaunchTests.swift */; };
 		FA0311E22B3DD15200C3D295 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA0311E12B3DD15200C3D295 /* Launch Screen.storyboard */; };
+		FA2E34732B510AF700025FC7 /* CommonViews in Frameworks */ = {isa = PBXBuildFile; productRef = FA2E34722B510AF700025FC7 /* CommonViews */; };
 		FA2E8FB82B468B8000D703C0 /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = FA2E8FB72B468B8000D703C0 /* Common */; };
 		FA2E8FBB2B468B8900D703C0 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = FA2E8FBA2B468B8900D703C0 /* Domain */; };
 		FA2E8FBE2B468B9100D703C0 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = FA2E8FBD2B468B9100D703C0 /* Data */; };
@@ -53,6 +54,7 @@
 		FA0311DF2B3DB3E200C3D295 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Domain; sourceTree = "<group>"; };
 		FA0311E02B3DD10A00C3D295 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FA0311E12B3DD15200C3D295 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		FA2E34702B510AE800025FC7 /* CommonViews */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CommonViews; sourceTree = "<group>"; };
 		FA2E8FB52B468B1000D703C0 /* HomeFlow */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = HomeFlow; sourceTree = "<group>"; };
 		FAEEC5DD2B45E1B600D0F8E5 /* Common */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Common; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA2E34732B510AF700025FC7 /* CommonViews in Frameworks */,
 				FA2E8FC12B468B9C00D703C0 /* InfoLogger in Frameworks */,
 				FA2E8FC42B468BA600D703C0 /* HomeFlow in Frameworks */,
 				FA2E8FBE2B468B9100D703C0 /* Data in Frameworks */,
@@ -90,6 +93,7 @@
 		FA0311A42B3DAFF200C3D295 = {
 			isa = PBXGroup;
 			children = (
+				FA2E34702B510AE800025FC7 /* CommonViews */,
 				FA2E8FB52B468B1000D703C0 /* HomeFlow */,
 				FAEEC5DD2B45E1B600D0F8E5 /* Common */,
 				FA0311DF2B3DB3E200C3D295 /* Domain */,
@@ -171,6 +175,7 @@
 				FA2E8FBD2B468B9100D703C0 /* Data */,
 				FA2E8FC02B468B9C00D703C0 /* InfoLogger */,
 				FA2E8FC32B468BA600D703C0 /* HomeFlow */,
+				FA2E34722B510AF700025FC7 /* CommonViews */,
 			);
 			productName = RickAndMortyExplorer;
 			productReference = FA0311AD2B3DAFF200C3D295 /* RickAndMortyExplorer.app */;
@@ -250,6 +255,7 @@
 				FA2E8FBC2B468B9100D703C0 /* XCLocalSwiftPackageReference "Data" */,
 				FA2E8FBF2B468B9C00D703C0 /* XCLocalSwiftPackageReference "InfoLogger" */,
 				FA2E8FC22B468BA600D703C0 /* XCLocalSwiftPackageReference "HomeFlow" */,
+				FA2E34712B510AF700025FC7 /* XCLocalSwiftPackageReference "CommonViews" */,
 			);
 			productRefGroup = FA0311AE2B3DAFF200C3D295 /* Products */;
 			projectDirPath = "";
@@ -628,6 +634,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		FA2E34712B510AF700025FC7 /* XCLocalSwiftPackageReference "CommonViews" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = CommonViews;
+		};
 		FA2E8FB62B468B8000D703C0 /* XCLocalSwiftPackageReference "Common" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Common;
@@ -651,6 +661,10 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FA2E34722B510AF700025FC7 /* CommonViews */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CommonViews;
+		};
 		FA2E8FB72B468B8000D703C0 /* Common */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Common;

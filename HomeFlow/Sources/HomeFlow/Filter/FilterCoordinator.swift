@@ -25,10 +25,17 @@ public class FilterCoordinator: Coordinator {
     init(
         status: String?,
         gender: String?,
-        factory: HomeCoordinatorFactory
+        factory: HomeCoordinatorFactoryProtocol
     ) {
         let viewModel = factory.makeFilterViewModel(status: status, gender: gender)
         self.viewModel = viewModel
+    }
+}
+
+public class FilterCoordinatorImpl: FilterCoordinator {
+
+    override init(status: String?, gender: String?, factory: HomeCoordinatorFactoryProtocol) {
+        super.init(status: status, gender: gender, factory: factory)
 
         viewModel.onResult = { [weak self] result in
             switch result {

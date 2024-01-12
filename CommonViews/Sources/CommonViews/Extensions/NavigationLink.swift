@@ -1,11 +1,9 @@
 //
 //  NavigationLink.swift
-//  
 //
-//  Created by Kolya Stypanovych on 03/01/2024.
 //
-
-import Foundation
+//  Created by Kolya Stypanovych on 12/01/2024.
+//
 
 import SwiftUI
 import SwiftUINavigation

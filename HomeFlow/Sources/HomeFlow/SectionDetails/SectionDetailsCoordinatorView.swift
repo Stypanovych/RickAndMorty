@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftUINavigation
+import CommonViews
 
 struct SectionDetailsCoordinatorView: View {
     

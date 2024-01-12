@@ -20,18 +20,26 @@ public class DetailsCoordinator: Coordinator {
     }
 
     var onResult: ((Result) -> Void)?
-    let viewModel: DetailsViewModel
+    var viewModel: DetailsViewModel
 
-    private let factory: HomeCoordinatorFactory
+    init(character: Characters.CharactersResult) {
+
+        let viewModel = DetailsViewModel(character: character)
+        self.viewModel = viewModel
+    }
+}
+
+public class DetailsCoordinatorImpl: DetailsCoordinator {
+
+    private let factory: HomeCoordinatorFactoryProtocol
 
     init(
-        factory: HomeCoordinatorFactory,
+        factory: HomeCoordinatorFactoryProtocol,
         character: Characters.CharactersResult
     ) {
         self.factory = factory
-
-        let viewModel = factory.makeDetailsViewModel(character: character)
-        self.viewModel = viewModel
+        super.init(character: character)
+        viewModel = factory.makeDetailsViewModel(character: character)
 
         viewModel.onResult = { [weak self] result in
             switch result {

@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Domain
-import Common
+import CommonViews
 import SDWebImageSwiftUI
 
 struct SectionDetailsView: View {

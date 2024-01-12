@@ -9,7 +9,7 @@ import Foundation
 import Domain
 import Common
 
-protocol HomeCoordinatorFactoryProtocol {
+public protocol HomeCoordinatorFactoryProtocol {
     func makeCharactersViewModel() -> CharactersSectionViewModel
     func makeSectionDetailsCoordinator(section: SectionInfo) -> SectionDetailsCoordinator
     func makeDetailsCoordinator(character: Characters.CharactersResult) -> DetailsCoordinator
@@ -22,27 +22,27 @@ public class HomeCoordinatorFactory: HomeCoordinatorFactoryProtocol {
 
     public init() {}
 
-    func makeCharactersViewModel() -> CharactersSectionViewModel {
-        CharactersSectionViewModel(useCase: ServiceContainer.shared.characterUseCase)
+    public func makeCharactersViewModel() -> CharactersSectionViewModel {
+        CharactersSectionViewModelImpl(useCase: ServiceContainer.shared.characterUseCase)
     }
 
-    func makeSectionDetailsCoordinator(section: SectionInfo) -> SectionDetailsCoordinator {
-        SectionDetailsCoordinator(factory: self, section: section)
+    public func makeSectionDetailsCoordinator(section: SectionInfo) -> SectionDetailsCoordinator {
+        SectionDetailsCoordinatorImpl(factory: self, section: section)
     }
 
-    func makeDetailsCoordinator(character: Characters.CharactersResult) -> DetailsCoordinator {
-        DetailsCoordinator(factory: self, character: character)
+    public func makeDetailsCoordinator(character: Characters.CharactersResult) -> DetailsCoordinator {
+        DetailsCoordinatorImpl(factory: self, character: character)
     }
 
-    func makeDetailsViewModel(character: Characters.CharactersResult) -> DetailsViewModel {
-        DetailsViewModel(character: character)
+    public func makeDetailsViewModel(character: Characters.CharactersResult) -> DetailsViewModel {
+        DetailsViewModelImpl(character: character)
     }
 
-    func makeFilterCoordinator(status: String?, gender: String?) -> FilterCoordinator {
-        FilterCoordinator(status: status, gender: gender, factory: self)
+    public func makeFilterCoordinator(status: String?, gender: String?) -> FilterCoordinator {
+        FilterCoordinatorImpl(status: status, gender: gender, factory: self)
     }
 
-    func makeFilterViewModel(status: String?, gender: String?) -> FilterViewModel {
-        FilterViewModel(status: status, gender: gender)
+    public func makeFilterViewModel(status: String?, gender: String?) -> FilterViewModel {
+        FilterViewModelImpl(status: status, gender: gender)
     }
 }

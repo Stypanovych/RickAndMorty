@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum SectionInfo: String, Identifiable, CaseIterable {
+public enum SectionInfo: String, Identifiable, CaseIterable, Equatable {
 
     case locations
     case episodes

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Common
+import CommonViews
 
 struct FilterView: View {
     @ObservedObject var viewModel: FilterViewModel

@@ -9,20 +9,23 @@ import Foundation
 import Domain
 
 public class DetailsViewModel: ObservableObject {
-    
     public enum Result: Equatable {
         case moveBack
     }
 
     public var onResult: ((Result) -> Void)?
-
     let character: Characters.CharactersResult
-
     init(character: Characters.CharactersResult) {
         self.character = character
     }
 
-    func onBackButtonPressed() {
+    func onBackButtonPressed() {}
+
+}
+
+public class DetailsViewModelImpl: DetailsViewModel {
+
+    override func onBackButtonPressed() {
         onResult?(.moveBack)
     }
 }

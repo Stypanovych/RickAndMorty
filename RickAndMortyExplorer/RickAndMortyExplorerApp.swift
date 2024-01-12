@@ -12,7 +12,7 @@ import HomeFlow
 struct RickAndMortyExplorerApp: App {
     var body: some Scene {
         WindowGroup {
-            HomeCoordinatorView(coordinator: HomeCoordinator(factory: HomeCoordinatorFactory()))
+            HomeCoordinatorView(coordinator: HomeCoordinatorImpl(factory: HomeCoordinatorFactory()))
         }
     }
 }

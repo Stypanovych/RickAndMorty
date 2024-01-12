@@ -10,13 +10,18 @@ import Domain
 
 class HomeViewModel: ObservableObject {
 
-    enum Result {
+    enum Result: Equatable {
         case sectionSelected(section: SectionInfo)
     }
 
     var onResult: ((Result) -> Void)?
 
-    func onSelect(section: SectionInfo) {
+    func onSelect(section: SectionInfo) {}
+}
+
+class HomeViewModelImpl: HomeViewModel {
+
+    override func onSelect(section: SectionInfo) {
         onResult?(.sectionSelected(section: section)) // we opens only characters view but if we have the same UI for those screens we may have only different VMs
     }
 }

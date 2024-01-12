@@ -11,7 +11,7 @@ import Domain
 import Common
 import Data
 
-public class CharactersSectionViewModel: ObservableObject, Resultable { //named as CharactersSectionViewModel because expected to have other VMs which calls location and episodes which may have the same view but different VMs.
+public class CharactersSectionViewModel: ObservableObject { //named as CharactersSectionViewModel because expected to have other VMs which calls location and episodes which may have the same view but different VMs.
 
     public enum Result: Equatable {
         case moveBack
@@ -21,20 +21,40 @@ public class CharactersSectionViewModel: ObservableObject, Resultable { //named 
 
     public var onResult: ((Result) -> Void)?
 
-    private var cancellables = Set<AnyCancellable>()
-
-    private var hasUpdate = false
-    var charactersQuery = CharactersQuery(page: 1)
     var hasNext: Bool = false
-
     @Published var characters = [Characters.CharactersResult]()
     @Published var errorDescription: String?
     @Published var searchName: String = String()
     @Published var noData = false
-    let useCase: CharactersUseCaseProtocol
+
+    init() {}
+
+    func fetchData() {}
+
+    func onBackButtonPressed() {}
+
+    func onFilterPressed() {}
+
+    func onCharacterPressed(_ character: Characters.CharactersResult) {}
+
+    func emptyRequest() {}
+
+    func nextPage() {}
+
+    func setFilters(status: String?, gender: String?) {}
+}
+
+public class CharactersSectionViewModelImpl: CharactersSectionViewModel {
+
+    private var cancellables = Set<AnyCancellable>()
+
+    private var hasUpdate = false
+    private var charactersQuery = CharactersQuery(page: 1)
+    private let useCase: CharactersUseCaseProtocol
 
     init(useCase: CharactersUseCaseProtocol) {
         self.useCase = useCase
+        super.init()
 
         $searchName
             .removeDuplicates()
@@ -48,7 +68,7 @@ public class CharactersSectionViewModel: ObservableObject, Resultable { //named 
             .store(in: &cancellables)
     }
 
-    func fetchData() {
+    override func fetchData() {
         useCase.execute(charactersQuery: charactersQuery)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
@@ -77,28 +97,28 @@ public class CharactersSectionViewModel: ObservableObject, Resultable { //named 
             .store(in: &cancellables)
     }
 
-    func onBackButtonPressed() {
+    override func onBackButtonPressed() {
         onResult?(.moveBack)
     }
 
-    func onFilterPressed() {
+    override func onFilterPressed() {
         onResult?(.showFilter(charactersQuery.status, charactersQuery.gender))
     }
 
-    func onCharacterPressed(_ character: Characters.CharactersResult) {
+    override func onCharacterPressed(_ character: Characters.CharactersResult) {
         onResult?(.showDetails(character))
     }
 
-    func emptyRequest() {
+    override func emptyRequest() {
         charactersQuery = CharactersQuery(page: 1)
     }
 
-    func nextPage() {
+    override func nextPage() {
         charactersQuery.page = ((charactersQuery.page ?? 1) + 1)
         fetchData()
     }
 
-    func setFilters(status: String?, gender: String?) {
+    override func setFilters(status: String?, gender: String?) {
         emptyRequest()
         hasUpdate = true
         charactersQuery.status = status

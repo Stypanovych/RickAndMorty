@@ -6,10 +6,7 @@
 //
 
 import SwiftUI
-
-public protocol FilterEnumProtocol {
-    var title: String { get }
-}
+import Common
 
 public struct FilterSectionView<Item: Identifiable & Equatable & FilterEnumProtocol>: View {
     let title: String

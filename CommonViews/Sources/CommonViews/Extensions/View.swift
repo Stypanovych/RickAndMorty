@@ -2,7 +2,7 @@
 //  View.swift
 //
 //
-//  Created by Kolya Stypanovych on 07/01/2024.
+//  Created by Kolya Stypanovych on 12/01/2024.
 //
 
 import SwiftUI

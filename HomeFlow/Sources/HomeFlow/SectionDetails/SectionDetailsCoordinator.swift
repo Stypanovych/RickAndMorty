@@ -24,12 +24,20 @@ public class SectionDetailsCoordinator: Coordinator {
     @Published public var route: Route?
     var onResult: ((Result) -> Void)?
 
-    private let factory: HomeCoordinatorFactory
-
     var viewModel: CharactersSectionViewModel
 
-    init(factory: HomeCoordinatorFactory, section: SectionInfo) {
+    init() {
+        self.viewModel = CharactersSectionViewModel()
+    }
+}
+
+public class SectionDetailsCoordinatorImpl: SectionDetailsCoordinator {
+
+    private let factory: HomeCoordinatorFactoryProtocol
+
+    init(factory: HomeCoordinatorFactoryProtocol, section: SectionInfo) {
         self.factory = factory
+        super.init()
         self.viewModel = factory.makeCharactersViewModel()
 
         viewModel.onResult = { [weak self] result in
@@ -61,7 +69,7 @@ public class SectionDetailsCoordinator: Coordinator {
 
     private func routeToDetailsScreen(character: Characters.CharactersResult) {
         let coordinator = factory.makeDetailsCoordinator(character: character)
-        
+
         coordinator.onResult = { [weak self] result in
             switch result {
             case .moveBack:

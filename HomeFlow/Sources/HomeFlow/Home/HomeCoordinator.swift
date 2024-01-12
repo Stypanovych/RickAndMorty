@@ -18,16 +18,26 @@ public class HomeCoordinator: Coordinator {
 
     @Published public var route: Route?
 
-    private let factory: HomeCoordinatorFactory
-    private var cancellable: AnyCancellable?
-
-    // MARK: Life cycle
-
     var viewModel: HomeViewModel
 
-    public init(factory: HomeCoordinatorFactory) {
-        self.factory = factory
+    public init() {
         self.viewModel = HomeViewModel()
+    }
+
+    private func routeSectionDetails(section: SectionInfo) {}
+}
+
+public class HomeCoordinatorImpl: HomeCoordinator {
+
+
+
+    private let factory: HomeCoordinatorFactoryProtocol
+    private var cancellable: AnyCancellable?
+
+    public init(factory: HomeCoordinatorFactoryProtocol) {
+        self.factory = factory
+        super.init()
+        self.viewModel = HomeViewModelImpl()
 
         viewModel.onResult = { [weak self] result in
             switch result {

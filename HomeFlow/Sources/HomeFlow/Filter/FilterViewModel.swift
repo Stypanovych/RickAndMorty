@@ -8,7 +8,7 @@
 import Foundation
 import Common
 
-class FilterViewModel: ObservableObject {
+public class FilterViewModel: ObservableObject {
 
     enum Status: String, CaseIterable, Identifiable, FilterEnumProtocol {
         case alive
@@ -58,36 +58,54 @@ class FilterViewModel: ObservableObject {
 
     var onResult: ((Result) -> Void)?
 
+    init() {}
+
+    func onBackButtonPressed() {}
+
+    func selectStatus(selectedStatus: Status?) {}
+
+    func resetStatus() {}
+
+    func selectGender(selectedGender: Gender) {}
+
+    func resetGender() {}
+
+    func onApplyFilterTapped() {}
+}
+
+public class FilterViewModelImpl: FilterViewModel {
+
     init(status: String?, gender: String?) {
+        super.init()
         if let status {
-            selectedStatus = Status(rawValue: status)
+            selectedStatus = Status(rawValue: status.lowercased())
         }
         if let gender {
-            selectedGender = Gender(rawValue: gender)
+            selectedGender = Gender(rawValue: gender.lowercased())
         }
     }
 
-    func onBackButtonPressed() {
+    override func onBackButtonPressed() {
         onResult?(.moveBack)
     }
 
-    func selectStatus(selectedStatus: Status?) {
+    override func selectStatus(selectedStatus: Status?) {
         self.selectedStatus = selectedStatus
     }
 
-    func resetStatus() {
+    override func resetStatus() {
         selectedStatus = nil
     }
 
-    func selectGender(selectedGender: Gender) {
+    override func selectGender(selectedGender: Gender) {
         self.selectedGender = selectedGender
     }
 
-    func resetGender() {
+    override func resetGender() {
         selectedGender = nil
     }
 
-    func onApplyFilterTapped() {
+    override func onApplyFilterTapped() {
         onResult?(.applyFilter(selectedStatus?.rawValue, selectedGender?.rawValue))
     }
 }
